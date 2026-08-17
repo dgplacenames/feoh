@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Account Balance</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section id="login-screen" class="screen">
+    <div class="login-box">
+      <h1>Account Balance</h1>
+      <form id="login-form">
+        <label>Email
+          <input type="email" id="login-email" autocomplete="username" required />
+        </label>
+        <label>Password
+          <input type="password" id="login-password" autocomplete="current-password" required />
+        </label>
+        <p id="login-error" class="error hidden"></p>
+        <button type="submit">Log in</button>
+      </form>
+    </div>
+  </section>
+  <section id="app-screen" class="screen hidden">
+    <header class="topbar">
+      <span id="user-email"></span>
+      <button id="logout-btn" class="link-btn">Log out</button>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="current">Current</button>
+      <button class="tab-btn" data-tab="newperiod">New period</button>
+      <button class="tab-btn" data-tab="archive">Archive</button>
+    </nav>
+    <div id="tab-current" class="tab-panel">
+
+      <div class="balance-card">
+        <p class="balance-label">Remaining this period</p>
+        <p id="balance-amount" class="balance-amount">--</p>
+        <p id="balance-sub" class="balance-sub"></p>
+        <p id="period-dates" class="period-dates"></p>
+      </div>
+
+      <form id="purchase-form" class="entry-form">
+        <input type="text" id="item-input" placeholder="Item" required />
+        <input type="number" id="price-input" placeholder="Price (£)" step="0.01" min="0" required />
+        <p id="purchase-error" class="error hidden"></p>
+        <button type="submit">Add purchase</button>
+      </form>
+
+      <h2 class="list-heading">This period's purchases</h2>
+      <div id="current-purchase-list" class="purchase-list"></div>
+    </div>
+    <div id="tab-newperiod" class="tab-panel hidden">
+      <h2 class="list-heading">Start a new pay period</h2>
+      <p class="tab-intro">This archives the current period and starts a fresh balance.</p>
+      <form id="new-period-form" class="entry-form">
+        <label>Start date
+          <input type="date" id="new-period-date" required />
+        </label>
+        <label>Starting amount (£)
+          <input type="number" id="new-period-amount" step="0.01" min="0" required />
+        </label>
+        <p id="new-period-error" class="error hidden"></p>
+        <button type="submit">Start new period</button>
+      </form>
+    </div>
+    <div id="tab-archive" class="tab-panel hidden">
+      <h2 class="list-heading">Past periods</h2>
+      <div id="archive-list" class="archive-list"></div>
+    </div>
+
+  </section>
+  <div id="confirm-modal" class="modal hidden">
+    <div class="modal-box">
+      <h2 id="confirm-title">Are you sure?</h2>
+      <p id="confirm-message" class="tab-intro"></p>
+      <div class="modal-actions">
+        <button type="button" id="confirm-cancel" class="secondary-btn">Cancel</button>
+        <button type="button" id="confirm-ok" class="danger-btn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
